@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+    <item>
+        <name>Tom</name>
+        <age>23</age>
+        <sex>男</sex>
+    </item>
+    <item>
+        <name>Jack</name>
+        <age>24</age>
+        <sex>女</sex>
+    </item>
+    <item>
+        <name>Ming</name>
+        <age>35</age>
+        <sex>男</sex>
+    </item>
+    <item>
+        <name>Machail</name>
+        <age>16</age>
+        <sex>女</sex>
+    </item>
+</root>

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+        <div class="user" id="user">
+            <table id="userTable" border="1" cellpadding="0" cellspacing="0">
+
+            </table>
+        </div>
+        <script src="js/jquery-v1.10.2.min.js"></script>
+        <script>
+          // ajax读取数据方法一
+            $.ajax({
+                url:'data/data.xml',
+                type:'POST',//此时post/get都行
+                dataType:'xml',
+                success: function (data) {
+                    $(data).find("root").find("item").each(function (i,item) {
+                        var name=$(item).find("name").text();
+                        var age=$(item).find("age").text();
+                        var sex=$(item).find("sex").text();
+                        console.log(name);
+                        $("#userTable").append("<tr><td>"+name+"</td><td>"+age+"</td> <td>"+sex+"</td></tr>")
+                         console.log('1.ajax请求');
+                        //全部双赢好或者全部单引号（谨记）；
+                    })
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            })
+            //get获取数据方法2
+          $.get('data/data.xml', function (data) {
+              $(data).find("root").find("item").each(function (i,item) {
+                  var name=$(item).find("name").text();
+                  var age=$(item).find("age").text();
+                  var sex=$(item).find("sex").text();
+                  console.log(name);
+                  $("#userTable").append('<tr><td>'+name+'</td><td>'+age+'</td> <td>'+sex+'</td></tr>')
+                  //全部双赢好或者全部单引号（谨记）；
+                  console.log('2.get请求');
+              })
+          })
+            //xhr获取数据方法3
+            var xhr=null;//var xhr;
+            if(window.XMLHttpRequest){
+                xhr=new XMLHttpRequest();//支持就创建
+            }else{//处理兼容
+                if(widdow.ActiveXObject){
+                    xhr=new ActiveXObject("Msxml2.XMLHTTP");//版本更高
+                }
+                else{
+                    xhr=new ActiveXObject("Microsoft.XMLHTTP");
+                }
+            }
+            xhr.open('POST','data/data.xml',true);//调用请求
+            xhr.onreadystatechange=function(data){
+                if(xhr.readyState==4 && xhr.status==200){
+                    var data=xhr.responseXML;
+                    $(data).find("root").find("item").each(function(i,item){
+                        var name=$(item).find("name").text();
+                        var age=$(item).find("age").text();
+                        var sex=$(item).find("sex").text();
+                        console.log(name);
+                        $("#userTable").append("<tr><td>"+name+"</td><td>"+age+"</td> <td>"+sex+"</td></tr>")
+                        console.log('3.xhr请求');
+                        //全部双赢好或者全部单引号（谨记）；
+                    })
+                }
+            }
+            xhr.send();//发送请求
+        </script>
+</body>
+</html>
