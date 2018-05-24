@@ -15,7 +15,7 @@
           // ajax读取数据方法一
             $.ajax({
                 url:'data/data.xml',
-                type:'POST',//此时post/get都行
+                type:'GET',//此时post/get都行
                 dataType:'xml',
                 success: function (data) {
                     $(data).find("root").find("item").each(function (i,item) {
@@ -56,7 +56,7 @@
                     xhr=new ActiveXObject("Microsoft.XMLHTTP");
                 }
             }
-            xhr.open('POST','data/data.xml',true);//调用请求
+            xhr.open('GET','data/data.xml',true);//调用请求
             xhr.onreadystatechange=function(data){
                 if(xhr.readyState==4 && xhr.status==200){
                     var data=xhr.responseXML;
